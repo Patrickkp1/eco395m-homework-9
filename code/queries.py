@@ -2,12 +2,14 @@
 # How many rows are in the 2009 dataset?
 # Return a single column called "count" with a single row containing the count.
 query_1 = """
+select count(*) from "pls_fy2009_pupld09a
     """
 
 # PROBLEM 2
 # How many rows are in the 2014 dataset?
 # Return a single column called "count" with a single row containing the count.
 query_2 = """
+select count(*) from pls_fy2014_pupld14a pfpa 
 """
 
 # PROBLEM 3
@@ -15,6 +17,8 @@ query_2 = """
 # Return a two columns called "max" and "man" with a single row containing the respective values
 
 query_3 = """
+select max("visits"), min("visits") from pls_fy2014_pupld14a pfpa 
+
 """
 
 # PROBLEM 4
@@ -22,6 +26,11 @@ query_3 = """
 # Return a two columns called "stabr" and "visits" with rows in descending order of visits.
 
 query_4 = """
+select "stabr", sum("visits") "visits"
+from pls_fy2014_pupld14a pfpa 
+group by "stabr"
+order by sum("visits") desc
+
 """
 
 # PROBLEM 5
@@ -29,6 +38,10 @@ query_4 = """
 # Return a single column called "change_in_visits" with a single row containing the total.
 
 query_5 = """
+select ((select sum(visits) 
+from "pls_fy2014_pupld14a" where visits >= 0) - 
+(select sum("visits") from "pls_fy2009_pupld09a"
+where visits >= 0)) "change_in_visits"
 """
 
 # PROBLEM 6
@@ -36,4 +49,8 @@ query_5 = """
 # Return a single column called "change_in_visits" with a single row containing the total.
 
 query_6 = """
+select (sum(pfpa2.visits) - sum(pfpa.visits)) as change_in_visits
+from pls_fy2014_pupld14a pfpa inner join pls_fy2009_pupld09a pfpa2 
+on pfpa.fscskey = pfpa2.fscskey where pfpa.visits >= 0 and
+pfpa2.visits  >= 0
 """
