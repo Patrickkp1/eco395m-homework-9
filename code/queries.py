@@ -49,7 +49,7 @@ where visits >= 0)) "change_in_visits"
 # Return a single column called "change_in_visits" with a single row containing the total.
 
 query_6 = """
-select (sum(pfpa2.visits) - sum(pfpa.visits)) as change_in_visits
+select (sum(pfpa.visits) - sum(pfpa2.visits)) as change_in_visits
 from pls_fy2014_pupld14a pfpa inner join pls_fy2009_pupld09a pfpa2 
 on pfpa.fscskey = pfpa2.fscskey where pfpa.visits >= 0 and
 pfpa2.visits  >= 0
