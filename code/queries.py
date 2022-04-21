@@ -2,7 +2,7 @@
 # How many rows are in the 2009 dataset?
 # Return a single column called "count" with a single row containing the count.
 query_1 = """
-select count(*) from "pls_fy2009_pupld09a
+select count(*) from "pls_fy2009_pupld09a"
     """
 
 # PROBLEM 2
